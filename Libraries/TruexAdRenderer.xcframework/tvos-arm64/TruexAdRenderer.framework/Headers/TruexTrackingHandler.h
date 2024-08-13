@@ -33,6 +33,7 @@
 - (void)trackInteractionEvent:(NSDictionary* _Nonnull)args;
 
 - (void)trackPlayerLoaded;
+- (void)trackPlayerLoadedExternalPixels;
 - (void)trackFiPlayerLoaded;
 - (void)trackChoiceCardSelectedUnit;
 - (void)trackChoiceCardSelectedWatch;
@@ -75,6 +76,7 @@
 - (void)trackRemotePlayPause;
 
 - (void)trackLoad;
+- (void)trackInitial;
 - (void)trackCredit;
 
 - (void)trackTotalTimeSpentWithTiming:(NSString* _Nonnull)timing;
