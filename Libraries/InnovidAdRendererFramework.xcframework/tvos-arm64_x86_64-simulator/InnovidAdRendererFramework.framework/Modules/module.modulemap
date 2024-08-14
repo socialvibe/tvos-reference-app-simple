@@ -1,0 +1,11 @@
+framework module InnovidAdRendererFramework {
+  umbrella header "InnovidAdRendererFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module InnovidAdRendererFramework.Swift {
+  header "InnovidAdRendererFramework-Swift.h"
+  requires objc
+}
