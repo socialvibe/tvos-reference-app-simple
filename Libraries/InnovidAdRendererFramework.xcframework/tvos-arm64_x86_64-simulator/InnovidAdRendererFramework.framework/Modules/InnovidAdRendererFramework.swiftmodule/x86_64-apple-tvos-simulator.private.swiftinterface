@@ -1,0 +1,223 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target x86_64-apple-tvos13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name InnovidAdRendererFramework
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import AVKit
+import CoreGraphics
+import CoreMedia
+import CoreText
+import Foundation
+@_exported import InnovidAdRendererFramework
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import os
+@objc public class TrueXAdParams : ObjectiveC.NSObject {
+  public var product: InnovidAdRendererFramework.InnovidAdRendererParams.ProductType
+  public var showSkipCardImmediately: Swift.Bool
+  public var episodeThumbnailImageURI: Swift.String?
+  public var episodeName: Swift.String?
+  public var interactiveAdTimeRequiredSeconds: Swift.Int
+  public var skipCardImageURI: Swift.String?
+  public var autoAdvanceTimerSeconds: Swift.Int?
+  public var choiceCardButtonDelayTimeInterval: Foundation.TimeInterval?
+  public var choiceCardBackgroundImageURI: Swift.String?
+  public var choiceCardBackgroundVideoURI: Swift.String?
+  public var choiceCardVoiceoverURI: Swift.String?
+  public var choiceCardInteractButton: InnovidAdRendererFramework.ChoiceCardButton?
+  public var choiceCardWatchButton: InnovidAdRendererFramework.ChoiceCardButton?
+  public var surveyConfigURI: Swift.String?
+  public var podIndex: Swift.Int
+  public var trueXURI: Swift.String?
+  public var trueXParams: Swift.String?
+  @objc public init(product: InnovidAdRendererFramework.InnovidAdRendererParams.ProductType = .none, showSkipCardImmediately: Swift.Bool = false, episodeThumbnailImageURI: Swift.String? = nil, episodeName: Swift.String? = nil, interactiveAdTimeRequiredSeconds: Swift.Int = 30, skipCardImageURI: Swift.String? = nil, autoAdvanceTimerSeconds: Swift.Int = -1, choiceCardBackgroundImageURI: Swift.String? = nil, choiceCardBackgroundVideoURI: Swift.String? = nil, choiceCardVoiceoverURI: Swift.String! = nil, choiceCardInteractButton: InnovidAdRendererFramework.ChoiceCardButton? = nil, choiceCardWatchButton: InnovidAdRendererFramework.ChoiceCardButton? = nil, choiceCardButtonDelayTimeInterval: Foundation.TimeInterval = -1, surveyConfigURI: Swift.String? = nil, podIndex: Swift.Int = 1, trueXURI: Swift.String? = nil, trueXParams: Swift.String? = nil)
+  @objc deinit
+}
+extension AVFoundation.AVPlayer.Status : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension AVFoundation.AVPlayer.TimeControlStatus : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension AVFoundation.AVPlayer.WaitingReason : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension AVFoundation.AVPlayerItem.Status : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension AVFoundation.AVPlayer {
+  @objc override dynamic open var debugDescription: Swift.String {
+    @objc get
+  }
+}
+extension AVFoundation.AVURLAsset {
+  @objc override dynamic open var debugDescription: Swift.String {
+    @objc get
+  }
+}
+extension AVFoundation.AVPlayerItem {
+  @objc override dynamic open var debugDescription: Swift.String {
+    @objc get
+  }
+}
+@objc public protocol InnovidAdRenderer {
+  @objc func play(presentingViewController: UIKit.UIViewController)
+  @objc func stop()
+  @objc func onSSAIAdPlayback(remainingTime: Foundation.TimeInterval, duration: Foundation.TimeInterval)
+  @objc func onSSAIAdComplete()
+}
+@objc public protocol InnovidDelegate {
+  @objc optional func innovid(onVideoEvent event: InnovidAdRendererFramework.VideoEvent, videoName: Swift.String, value: Swift.String?)
+  @objc optional func innovid(onLifecycleEvent event: InnovidAdRendererFramework.LifecycleEvent, value: Swift.String?)
+  @objc optional func innovid(onInteractionEvent event: InnovidAdRendererFramework.InteractionEvent, value: Swift.String?)
+}
+@objc public enum LifecycleEvent : Swift.Int {
+  case start
+  case impression
+  case cancel
+  case fail
+  case complete
+  public var description: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum VideoEvent : Swift.Int {
+  case start
+  case firstQuartile
+  case midpoint
+  case thirdQuartile
+  case complete
+  case progress
+  public var description: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum InteractionEvent : Swift.Int {
+  case acceptInvitation
+  case expand
+  case collapse
+  public var description: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol InnovidAdRendererDelegate {
+  @objc func innovidDidComplete(timeSpent: Foundation.NSNumber?)
+  @objc func innovidUserDidCancelStream()
+  @objc func innovidDidFail(_ error: Swift.String)
+  @objc optional func innovidDidStart()
+  @objc optional func innovidUserDidOptIn()
+  @objc optional func innovidUserDidOptOut()
+  @objc optional func innovidUserDidTimeout()
+  @objc optional func innovidUserDidCancelInteractiveAd()
+  @objc optional func innovidUserDidAchieveCredit()
+}
+extension InnovidAdRendererFramework.InnovidProvider {
+  @objc public static func instantiate(adIdentifier: Swift.String, adURI: Swift.String, delegate: any InnovidAdRendererFramework.InnovidDelegate, params: InnovidAdRendererFramework.InnovidAdParams, isAdURIJSON: Swift.Bool = true) -> any InnovidAdRendererFramework.InnovidAdRenderer
+  @objc public static func instantiateTrueX(adIdentifier: Swift.String, adURI: Swift.String, delegate: any InnovidAdRendererFramework.InnovidAdRendererDelegate, params: InnovidAdRendererFramework.TrueXAdParams) -> any InnovidAdRendererFramework.InnovidAdRenderer
+  @objc public static func instantiateLive(adIdentifier: Swift.String, adURI: Swift.String, delegate: any InnovidAdRendererFramework.InnovidDelegate, params: InnovidAdRendererFramework.LiveAdParams, isAdURIJSON: Swift.Bool = true) -> any InnovidAdRendererFramework.InnovidAdRenderer
+  @objc public static func instantiateSSAI(adIdentifier: Swift.String, adURI: Swift.String, delegate: any InnovidAdRendererFramework.InnovidDelegate, params: InnovidAdRendererFramework.SSAIAdParams) -> any InnovidAdRendererFramework.InnovidAdRenderer
+}
+@objc @_inheritsConvenienceInitializers public class InnovidProvider : ObjectiveC.NSObject {
+  public static func instantiateSSAI(adIdentifier: Swift.String, adURI: Swift.String, delegate: (any InnovidAdRendererFramework.InnovidDelegate)?, showName: Swift.String? = nil, showGenre: Swift.String? = nil) -> any InnovidAdRendererFramework.InnovidAdRenderer
+  public static func instantiate(adURI: Swift.String, params: InnovidAdRendererFramework.InnovidAdRendererParams, delegate: any InnovidAdRendererFramework.InnovidAdRendererDelegate, isAdURIJSON: Swift.Bool = false) -> any InnovidAdRendererFramework.InnovidAdRenderer
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class LiveAdParams : ObjectiveC.NSObject {
+  public var liveAdSlotStartDate: Foundation.Date
+  public var liveAdDuration: Foundation.TimeInterval
+  public var showName: Swift.String?
+  public var showGenre: Swift.String?
+  @objc public init(liveAdSlotStartDate: Foundation.Date, liveAdDuration: Foundation.TimeInterval = -1, showName: Swift.String? = nil, showGenre: Swift.String? = nil)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class FontBlaster {
+  public static var debugEnabled: Swift.Bool
+  public static var loadedFonts: [Swift.String]
+  final public class func blast(bundle: Foundation.Bundle = Bundle.main)
+  final public class func blast(bundle: Foundation.Bundle = Bundle.main, completion handler: (([Swift.String]) -> Swift.Void)?)
+  @objc deinit
+}
+@objc public class InnovidAdRendererParams : ObjectiveC.NSObject {
+  @objc public enum ProductType : Swift.Int, Swift.RawRepresentable {
+    case none
+    case sponsoredStream
+    case sponsoredAdBreak
+    case continueProduct
+    public typealias RawValue = Swift.String
+    public var rawValue: InnovidAdRendererFramework.InnovidAdRendererParams.ProductType.RawValue {
+      get
+    }
+    public init?(rawValue: InnovidAdRendererFramework.InnovidAdRendererParams.ProductType.RawValue?)
+    public init?(rawValue: InnovidAdRendererFramework.InnovidAdRendererParams.ProductType.RawValue)
+  }
+  @objc public enum Renderer : Swift.Int, Swift.RawRepresentable {
+    case iRoll
+    case trueX
+    case ssai
+    case live
+    public typealias RawValue = Swift.String
+    public var rawValue: InnovidAdRendererFramework.InnovidAdRendererParams.Renderer.RawValue {
+      get
+    }
+    public init?(rawValue: InnovidAdRendererFramework.InnovidAdRendererParams.Renderer.RawValue)
+  }
+  public var adIdentifier: Swift.String
+  @objc required public init(adIdentifier: Swift.String, renderer: InnovidAdRendererFramework.InnovidAdRendererParams.Renderer = .trueX, trueXAdParams: InnovidAdRendererFramework.TrueXAdParams = TrueXAdParams(), liveAdParams: InnovidAdRendererFramework.LiveAdParams? = nil, innovidAdParams: InnovidAdRendererFramework.InnovidAdParams? = nil)
+  @objc convenience public init(adIdentifier: Swift.String, trueXAdParams: InnovidAdRendererFramework.TrueXAdParams)
+  @objc convenience public init(adIdentifier: Swift.String, liveAdParams: InnovidAdRendererFramework.LiveAdParams)
+  @objc convenience public init(adIdentifier: Swift.String, innovidAdParams: InnovidAdRendererFramework.InnovidAdParams)
+  @objc deinit
+}
+@objc public class ChoiceCardButton : ObjectiveC.NSObject {
+  @objc public init(x: Swift.Int, y: Swift.Int, imageURI: Swift.String)
+  @objc deinit
+}
+@objc public class InnovidAdParams : ObjectiveC.NSObject {
+  public var showName: Swift.String?
+  public var showGenre: Swift.String?
+  @objc public init(showName: Swift.String? = nil, showGenre: Swift.String? = nil)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class SSAIAdParams : InnovidAdRendererFramework.InnovidAdParams {
+  @objc override public init(showName: Swift.String? = nil, showGenre: Swift.String? = nil)
+  @objc deinit
+}
+extension InnovidAdRendererFramework.LifecycleEvent : Swift.Equatable {}
+extension InnovidAdRendererFramework.LifecycleEvent : Swift.Hashable {}
+extension InnovidAdRendererFramework.LifecycleEvent : Swift.RawRepresentable {}
+extension InnovidAdRendererFramework.VideoEvent : Swift.Equatable {}
+extension InnovidAdRendererFramework.VideoEvent : Swift.Hashable {}
+extension InnovidAdRendererFramework.VideoEvent : Swift.RawRepresentable {}
+extension InnovidAdRendererFramework.InteractionEvent : Swift.Equatable {}
+extension InnovidAdRendererFramework.InteractionEvent : Swift.Hashable {}
+extension InnovidAdRendererFramework.InteractionEvent : Swift.RawRepresentable {}
+extension InnovidAdRendererFramework.InnovidAdRendererParams.ProductType : Swift.Equatable {}
+extension InnovidAdRendererFramework.InnovidAdRendererParams.ProductType : Swift.Hashable {}
+extension InnovidAdRendererFramework.InnovidAdRendererParams.Renderer : Swift.Equatable {}
+extension InnovidAdRendererFramework.InnovidAdRendererParams.Renderer : Swift.Hashable {}
